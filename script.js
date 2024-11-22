@@ -1,42 +1,43 @@
-// Данные для сайта
+// Данные для сайта (обновленный пример)
 const data = {
     classes: {
-        1: ['Математика', 'Русский язык', 'Природоведение'],
-        2: ['Математика', 'Чтение', 'Окружающий мир'],
-        3: ['Математика', 'Литература', 'Музыка']
+        8: ['Алгебра', 'Геометрия', 'Физика', 'Теория вероятности и статистика', 'ОБЗР', 'Литература', 'Русский язык', 'Информатика', 'Биология', 'Химия', 'Английский язык', 'География', 'История', 'Обществознание']
     },
     topics: {
-        1: { // Темы для класса 1
-            'Математика': ['Алгебра', 'Геометрия'],
-            'Русский язык': ['Грамматика', 'Синтаксис'],
-            'Природоведение': ['Экосистемы', 'Организмы']
-        },
-        2: { // Темы для класса 2
-            'Математика': ['Числа', 'Дроби'],
-            'Чтение': ['Литературные произведения', 'Словарный запас'],
-            'Окружающий мир': ['Природа', 'Животные']
-        },
-        3: { // Темы для класса 3
-            'Математика': ['Уравнения', 'Геометрия'],
-            'Литература': ['Поэзия', 'Проза'],
-            'Музыка': ['Инструменты', 'Композиции']
+        8: {
+            'Алгебра': ['ФСУ', 'Квадратные уравнения'],
+            'Геометрия': ['Геометрические фигуры', 'Теорема Фаллеса'],
+			'Физика': ['Законы Ньютона', 'Удельная теплота плавления']
         }
     },
     details: {
-        'Алгебра': {
-            title: 'Основные правила',
-            content: 'Алгебра — это раздел математики, изучающий уравнения и функции.',
-            image: 'path_to_image/algebra.png'
+        'ФСУ': {
+            title: 'ФСУ',
+            content: 'Формулы сокращённого умножения (ФСУ) — это формулы, которые позволяют проводить умножение, возведение в степень чисел и многочленов сокращённо, то есть быстрее при более компактной записи решения. ',
+            image: 'https://3.downloader.disk.yandex.ru/preview/e512736e1e93202c5b0b80ad6e9982d489bac6fe96f4774812bbc29941023054/inf/uLA7pfAspTBMHzyaTB5qhhqdojnOAq78aFG0wuQQVlk_t0ijKG9pDx9_luMKai9RBF1MvLDM7xuMry_-MPduGA%3D%3D?uid=558074080&filename=c5fc8a965d3c06665b5d0c7a2cde8e4c.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=558074080&tknv=v2&size=2512x1316',
+            subtopics: [
+                //{ title: 'Формула 1', description: 'Описание первой формулы.' },
+                //{ title: 'Формула 2', description: 'Описание второй формулы.' }
+            ]
         },
-        'Геометрия': {
-            title: 'Основные фигуры',
-            content: 'Геометрия — это раздел математики, изучающий формы и их свойства.',
-            image: 'path_to_image/geometry.png'
+        'Геометрические фигуры': {
+            title: 'Геометрические фигуры',
+            content: 'Геометрия — это раздел математики, изучающий фигуры и их свойства.',
+            image: 'path_to_image/geometry.png',
+            subtopics: [
+                { title: 'Фигура 1', description: 'Описание первой фигуры.' },
+                { title: 'Фигура 2', description: 'Описание второй фигуры.' }
+            ]
         },
-        'Числа': {
-            title: 'Введение в числа',
-            content: 'Числа — это основа математики, они используются для счета.',
-            image: 'path_to_image/numbers.png'
+        'Законы Ньютона': {
+            title: 'Законы Ньютона',
+            content: 'пупупупупупу',
+            image: 'path_to_image/numbers.png',
+            subtopics: [
+                { title: '1 закон', description: 'Описание первого' },
+				{ title: '2 закон', description: 'Описание второго' },
+                { title: '3 закон', description: 'Описание третьего' }
+            ]
         }
     }
 };
@@ -54,7 +55,6 @@ function renderView(view, currentData) {
     contentDiv.innerHTML = '';
 
     if (view === 'classes') {
-        // Очистка истории на главной странице
         appState.previousViews = [];
         contentDiv.innerHTML = '<h2>Выберите класс:</h2>';
         Object.keys(data.classes).forEach(cls => {
@@ -91,6 +91,12 @@ function renderView(view, currentData) {
                 <h2>${topicDetails.title}</h2>
                 <p>${topicDetails.content}</p>
                 ${topicDetails.image ? `<img src="${topicDetails.image}" alt="${currentData}" class="topic-image">` : ''}
+                ${topicDetails.subtopics.map(subtopic => `
+                    <div class="panel">
+                        <h4>${subtopic.title}</h4>
+                        <p>${subtopic.description}</p>
+                    </div>
+                `).join('')}
             `;
         } else {
             contentDiv.innerHTML += `<p>Нет данных для этой темы.</p>`;
@@ -100,7 +106,6 @@ function renderView(view, currentData) {
 
 // Навигация между экранами
 function navigateTo(view, currentData) {
-    // Сохраняем текущий экран в историю перед переходом
     appState.previousViews.push({ view: appState.currentView, data: appState.currentData });
     appState.currentView = view;
     appState.currentData = currentData;
@@ -113,15 +118,7 @@ function goBack() {
         const previousState = appState.previousViews.pop();
         appState.currentView = previousState.view;
         appState.currentData = previousState.data;
-
-        // Показать кнопки для выбора предмета/темы/класса
-        if (previousState.view === 'classes') {
-            renderView('classes', null);
-        } else if (previousState.view === 'subjects') {
-            renderView('subjects', previousState.data);
-        } else if (previousState.view === 'topics') {
-            renderView('topics', previousState.data);
-        }
+        renderView(previousState.view, previousState.data);
     }
 }
 

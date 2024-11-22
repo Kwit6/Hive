@@ -50,7 +50,7 @@ footer {
     padding: 10px 0;
     background-color: #6200ea;
     color: white;
-    position: fixed;
+    position: static;
     bottom: 0;
     width: 100%;
 }
