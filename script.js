@@ -14,7 +14,7 @@ const data = {
         'ФСУ': {
             title: 'ФСУ',
             content: 'Формулы сокращённого умножения (ФСУ) — это формулы, которые позволяют проводить умножение, возведение в степень чисел и многочленов сокращённо, то есть быстрее при более компактной записи решения. ',
-            image: 'https://3.downloader.disk.yandex.ru/preview/e512736e1e93202c5b0b80ad6e9982d489bac6fe96f4774812bbc29941023054/inf/uLA7pfAspTBMHzyaTB5qhhqdojnOAq78aFG0wuQQVlk_t0ijKG9pDx9_luMKai9RBF1MvLDM7xuMry_-MPduGA%3D%3D?uid=558074080&filename=c5fc8a965d3c06665b5d0c7a2cde8e4c.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=558074080&tknv=v2&size=2512x1316',
+            image: 'https://github.com/Kwit6/Hive/blob/main/FSU.jpg?raw=true',
             subtopics: [
                 //{ title: 'Формула 1', description: 'Описание первой формулы.' },
                 //{ title: 'Формула 2', description: 'Описание второй формулы.' }
